@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduFund AI - Smart Education Funding Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Landing Page Specific Styles */
+        .landing-body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .landing-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Navigation */
+        .landing-nav {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 15px 30px;
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .nav-logo i {
+            font-size: 32px;
+            color: #667eea;
+        }
+        
+        .nav-logo h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+        }
+        
+        .nav-logo span {
+            color: #667eea;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: #667eea;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn-outline {
+            padding: 10px 25px;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            background: transparent;
+            color: #667eea;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        .btn-primary {
+            padding: 10px 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 60px;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+        
+        .hero-content {
+            flex: 1;
+        }
+        
+        .hero-badge {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            padding: 8px 20px;
+            border-radius: 30px;
+            display: inline-block;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .hero-content h1 {
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .hero-content .highlight {
+            color: #667eea;
+            position: relative;
+        }
+        
+        .hero-content .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: rgba(102, 126, 234, 0.2);
+            z-index: -1;
+        }
+        
+        .hero-content p {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin: 30px 0;
+        }
+        
+        .stat-item h3 {
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .stat-item p {
+            font-size: 14px;
+            color: #999;
+            margin: 0;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .hero-image i {
+            font-size: 250px;
+            color: #667eea;
+            opacity: 0.2;
+        }
+        
+        /* Features Section */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        
+        .feature-icon i {
+            font-size: 40px;
+            color: white;
+        }
+        
+        .feature-card h3 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .feature-card p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        /* How It Works */
+        .how-it-works {
+            background: white;
+            border-radius: 30px;
+            padding: 60px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .section-title {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .section-subtitle {
+            color: #666;
+            margin-bottom: 50px;
+        }
+        
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+        }
+        
+        .step {
+            flex: 1;
+            position: relative;
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 24px;
+            margin: 0 auto 20px;
+        }
+        
+        .step h3 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .step p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 30px;
+            padding: 60px;
+            text-align: center;
+            color: white;
+        }
+        
+        .cta h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        
+        .cta p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .cta .btn-primary {
+            background: white;
+            color: #667eea;
+            padding: 15px 40px;
+            font-size: 18px;
+        }
+        
+        .cta .btn-outline {
+            border-color: white;
+            color: white;
+            padding: 15px 40px;
+            font-size: 18px;
+        }
+        
+        .cta .btn-outline:hover {
+            background: white;
+            color: #667eea;
+        }
+        
+        /* Footer */
+        .footer {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+        
+        .footer-col h4 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-col ul li a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-col ul li a:hover {
+            color: #667eea;
+        }
+        
+        .copyright {
+            grid-column: 1 / -1;
+            text-align: center;
+            color: #999;
+            padding-top: 30px;
+            border-top: 1px solid #eee;
+        }
+        
+        /* Login Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .modal-content h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .modal-content .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .modal-content input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 15px;
+        }
+        
+        .modal-content input:focus {
+            border-color: #667eea;
+            outline: none;
+        }
+        
+        .role-selector {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .role-option {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .role-option.active {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+        }
+        
+        .role-option i {
+            display: block;
+            font-size: 24px;
+            margin-bottom: 5px;
+            color: #667eea;
+        }
+        
+        .switch-auth {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .switch-auth a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        @media (max-width: 1024px) {
+            .features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hero-stats {
+                justify-content: center;
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+            }
+            
+            .steps {
+                flex-direction: column;
+            }
+            
+            .footer {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .landing-nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="landing-body">
+    <div class="landing-container">
+        <!-- Navigation -->
+        <nav class="landing-nav">
+            <div class="nav-logo">
+                <i class="fas fa-graduation-cap"></i>
+                <h2>EduFund <span>AI</span></h2>
+            </div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How it Works</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+                <div class="nav-buttons">
+                    <button class="btn-outline" onclick="showLoginModal('student')">Student Login</button>
+                    <button class="btn-primary" onclick="showLoginModal('admin')">Admin Login</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <span class="hero-badge">AI-Powered Education Funding</span>
+                <h1>
+                    Smart Funding for
+                    <span class="highlight">Brighter Futures</span>
+                </h1>
+                <p>
+                    EduFund AI match students with personalized 
+                    funding opportunities, making education accessible for everyone.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <h3>₹50L+</h3>
+                        <p>Funding Available</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>500+</h3>
+                        <p>Active Students</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>100+</h3>
+                        <p>Scholarships</p>
+                    </div>
+                </div>
+                <div class="hero-buttons">
+                    <button class="btn-primary" onclick="showLoginModal('student')">
+                        <i class="fas fa-rocket"></i> Get Started
+                    </button>
+                    <button class="btn-outline" onclick="showDemo()">
+                        <i class="fas fa-play"></i> Watch Demo
+                    </button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3>Matching Engiene</h3>
+                <p>Smart algorithms match you with the best funding opportunities based on your profile</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-hand-holding-usd"></i>
+                </div>
+                <h3>Income-Based Repayment</h3>
+                <p>Pay only when you earn, with flexible repayment based on your income</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-link"></i>
+                </div>
+                <h3>Blockchain Transparency</h3>
+                <p>All transactions recorded on blockchain for complete transparency</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Community Crowdfunding</h3>
+                <p>Raise funds from alumni, employers, and the community</p>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section id="how-it-works" class="how-it-works">
+            <h2 class="section-title">How EduFund AI Works</h2>
+            <p class="section-subtitle">Three simple steps to fund your education</p>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Create Your Profile</h3>
+                    <p>Tell us about your academic background, financial needs, and career goals</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>AI Assessment</h3>
+                    <p>Our AI analyzes your profile and identifies funding gaps and opportunities</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Get Matched</h3>
+                    <p>Receive personalized funding recommendations and apply instantly</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta">
+            <h2>Ready to Fund Your Education?</h2>
+            <p>Join thousands of students who have found their perfect funding match with EduFund AI</p>
+            <div class="cta-buttons">
+                <button class="btn-primary" onclick="showLoginModal('student')">
+                    <i class="fas fa-user-graduate"></i> Student Login
+                </button>
+                <button class="btn-outline" onclick="showLoginModal('admin')">
+                    <i class="fas fa-user-tie"></i> Admin Login
+                </button>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-col">
+                <h4>EduFund AI</h4>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#team">Our Team</a></li>
+                    <li><a href="#careers">Careers</a></li>
+                    <li><a href="#press">Press</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>For Students</h4>
+                <ul>
+                    <li><a href="#scholarships">Scholarships</a></li>
+                    <li><a href="#work-study">Work-Study</a></li>
+                    <li><a href="#crowdfunding">Crowdfunding</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>For Partners</h4>
+                <ul>
+                    <li><a href="#employers">Employers</a></li>
+                    <li><a href="#institutions">Institutions</a></li>
+                    <li><a href="#donors">Donors</a></li>
+                    <li><a href="#alumni">Alumni</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> info@edufund.ai</li>
+                    <li><i class="fas fa-phone"></i> 999-999-9999</li>
+                    <li><i class="fas fa-map-marker"></i> MIT School of Computing</li>
+                </ul>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 EduFund AI. All rights reserved. | TYAIA-105</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <h2 id="modal-title">Student Login</h2>
+            
+            <div class="role-selector">
+                <div class="role-option active" onclick="switchRole('student')">
+                    <i class="fas fa-user-graduate"></i>
+                    <span>Student</span>
+                </div>
+                <div class="role-option" onclick="switchRole('admin')">
+                    <i class="fas fa-user-tie"></i>
+                    <span>Admin</span>
+                </div>
+            </div>
+            
+            <form id="login-form">
+                <div class="form-group">
+                    <input type="email" id="login-email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="login-password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%;">Login</button>
+            </form>
+            
+            <div class="switch-auth">
+                <a href="#" onclick="showSignup()">Don't have an account? Sign up</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signup-modal" class="modal">
+        <div class="modal-content">
+            <h2>Create Account</h2>
+            
+            <form id="signup-form">
+                <div class="form-group">
+                    <input type="text" id="signup-name" placeholder="Full Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="signup-email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="signup-password" placeholder="Password" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="signup-confirm" placeholder="Confirm Password" required>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%;">Sign Up</button>
+            </form>
+            
+            <div class="switch-auth">
+                <a href="#" onclick="showLogin()">Already have an account? Login</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE_URL = window.location.origin.includes('localhost') 
+            ? 'http://localhost:5000/api' 
+            : '/api';
+        
+        let currentRole = 'student';
+        
+        function showLoginModal(role) {
+            currentRole = role;
+            document.getElementById('modal-title').textContent = role === 'student' ? 'Student Login' : 'Admin Login';
+            document.getElementById('login-modal').classList.add('active');
+            
+            // Update role selector
+            document.querySelectorAll('.role-option').forEach(opt => {
+                opt.classList.remove('active');
+                if (opt.querySelector('span').textContent.toLowerCase() === role) {
+                    opt.classList.add('active');
+                }
+            });
+        }
+        
+        function switchRole(role) {
+            currentRole = role;
+            document.getElementById('modal-title').textContent = role === 'student' ? 'Student Login' : 'Admin Login';
+            document.querySelectorAll('.role-option').forEach(opt => {
+                opt.classList.remove('active');
+                if (opt.querySelector('span').textContent.toLowerCase() === role) {
+                    opt.classList.add('active');
+                }
+            });
+        }
+        
+        function showSignup() {
+            document.getElementById('login-modal').classList.remove('active');
+            document.getElementById('signup-modal').classList.add('active');
+        }
+        
+        function showLogin() {
+            document.getElementById('signup-modal').classList.remove('active');
+            document.getElementById('login-modal').classList.add('active');
+        }
+        
+        function showDemo() {
+            alert('Demo video would play here!');
+        }
+        
+        // Login Form
+        document.getElementById('login-form')?.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    // Store both token and user data
+                    localStorage.setItem('token', data.access_token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    
+                    console.log('Login successful:', data.user);
+                    
+                    if (data.user.role === 'admin') {
+                        window.location.href = '/admin';
+                    } else {
+                        window.location.href = '/student';
+                    }
+                } else {
+                    alert('Invalid credentials');
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                alert('Login failed');
+            }
+        });
+
+        // Signup Form
+        document.getElementById('signup-form')?.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('signup-name').value;
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            const confirm = document.getElementById('signup-confirm').value;
+            
+            if (password !== confirm) {
+                alert('Passwords do not match');
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/auth/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name,
+                        email,
+                        password,
+                        role: 'student'
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    // Store both token and user data
+                    localStorage.setItem('token', data.access_token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    
+                    alert('Registration successful!');
+                    window.location.href = '/student';
+                } else {
+                    alert('Registration failed: ' + (data.error || 'Unknown error'));
+                }
+            } catch (error) {
+                console.error('Signup error:', error);
+                alert('Signup failed');
+            }
+        });
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('active');
+            }
+        }
+    </script>
+</body>
+</html>

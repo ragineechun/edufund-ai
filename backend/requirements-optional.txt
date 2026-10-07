@@ -1,0 +1,10 @@
+# Only needed for the experimental modules (resume analysis, semantic search,
+# Gemini resume scanner, scholarship crawler). The main app runs without them.
+nltk
+textblob
+PyPDF2
+python-docx
+pdfplumber
+google-generativeai
+requests
+beautifulsoup4

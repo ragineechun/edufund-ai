@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduFund AI - Student Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <h1>EduFund <span>AI</span> <small style="font-size: 14px;">Student Portal</small></h1>
+            </div>
+            <div class="admin-profile">
+                <span>Welcome, <strong id="student-name">Student</strong></span>
+                <button class="btn-secondary" onclick="logout()" style="padding: 8px 15px;">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Dashboard -->
+        <div class="dashboard">
+            <!-- Sidebar Navigation -->
+            <div class="sidebar">
+                <!-- In the sidebar navigation, add these new tabs -->
+                <ul class="nav-menu">
+                    <li class="active" data-tab="assessment">
+                        <i class="fas fa-clipboard-list"></i>
+                        <span>Assessment</span>
+                    </li>
+                    <li data-tab="recommendations">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>Recommendations</span>
+                    </li>
+                    <li data-tab="all-scholarships">  <!-- NEW TAB -->
+                        <i class="fas fa-award"></i>
+                        <span>All Scholarships</span>
+                    </li>
+                    <li data-tab="all-workstudy">      <!-- NEW TAB -->
+                        <i class="fas fa-briefcase"></i>
+                        <span>Work-Study Programs</span>
+                    </li>
+                    <li data-tab="applications">
+                        <i class="fas fa-file-alt"></i>
+                        <span>My Applications</span>
+                    </li>
+                    <li data-tab="crowdfunding">
+                        <i class="fas fa-hand-holding-heart"></i>
+                        <span>Crowdfunding</span>
+                    </li>
+                    <li data-tab="profile">
+                        <i class="fas fa-user"></i>
+                        <span>My Profile</span>
+                    </li>
+                </ul>
+                <div class="sidebar-footer">
+                    <p>MIT School of Computing</p>
+                    <p>Dept. of CSE</p>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="main-content">
+                <!-- Assessment Tab -->
+                <div id="assessment" class="tab-content active">
+                    <h2><i class="fas fa-clipboard-list"></i> Financial Assessment</h2>
+                    <p class="section-desc">Complete your profile for AI-powered analysis</p>
+                    
+                    <form id="student-assessment-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-user"></i> Full Name</label>
+                                <input type="text" id="studentName" placeholder="Full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-envelope"></i> Email</label>
+                                <input type="email" id="email" placeholder="student@example.com" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-rupee-sign"></i> Family Annual Income (₹)</label>
+                                <input type="number" id="familyIncome" placeholder="e.g., 500000" required>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-star"></i> Academic Score (%)</label>
+                                <input type="number" id="academicScore" placeholder="0-100" min="0" max="100" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-trophy"></i> Extracurricular Activities</label>
+                                <input type="number" id="extracurriculars" placeholder="Number of activities" min="0" value="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-users"></i> Siblings in Education</label>
+                                <input type="number" id="siblingsEducation" placeholder="Number" min="0" value="0" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-graduation-cap"></i> Course Name</label>
+                                <input type="text" id="course" placeholder="e.g., Computer Science" required>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-building"></i> Institution</label>
+                                <input type="text" id="institution" placeholder="University/College" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-calendar-alt"></i> Course Duration (years)</label>
+                                <input type="number" id="courseDuration" placeholder="e.g., 4" min="1" max="6" value="4" required>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-money-bill-wave"></i> Total Tuition Fee (₹)</label>
+                                <input type="number" id="tuitionFee" placeholder="e.g., 400000" required>
+                            </div>
+                        </div>
+
+                        <!-- Add missing fields that the database expects -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-map-marker-alt"></i> Preferred Location (Optional)</label>
+                                <input type="text" id="preferredLocation" placeholder="e.g., Mumbai, Remote">
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-clock"></i> Preferred Hours/Week (Optional)</label>
+                                <input type="number" id="preferredHours" placeholder="e.g., 20" min="0" max="40">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-code"></i> Skills (comma separated)</label>
+                                <input type="text" id="skills" placeholder="e.g., Python, Communication, Leadership">
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-rupee-sign"></i> Expected Stipend (Optional)</label>
+                                <input type="number" id="expectedStipend" placeholder="e.g., 15000">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-robot"></i> Run AI Assessment
+                        </button>
+                    </form>
+
+                    <div id="assessment-loading" class="loading-spinner" style="display: none;">
+                        <div class="spinner"></div>
+                        <p>AI is analyzing your profile...</p>
+                    </div>
+
+                    <div id="assessment-result" class="result-card" style="display: none;">
+                        <h3><i class="fas fa-chart-pie"></i> Assessment Results</h3>
+                        <div class="result-grid">
+                            <div class="result-item">
+                                <span class="label">Funding Gap:</span>
+                                <span class="value" id="funding-gap">₹0</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="label">Repayment Capacity:</span>
+                                <span class="value" id="repayment-capacity">-</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="label">Eligibility Score:</span>
+                                <span class="value" id="eligibility-score">0%</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="label">Risk Level:</span>
+                                <span class="value" id="risk-level">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recommendations Tab -->
+                <div id="recommendations" class="tab-content">
+                    <h2><i class="fas fa-lightbulb"></i> Personalized Recommendations</h2>
+                    <p class="section-desc">AI-matched funding options based on your profile</p>
+                    
+                    <div id="recommendations-loading" class="loading-spinner" style="display: none;">
+                        <div class="spinner"></div>
+                        <p>Finding the best options for you...</p>
+                    </div>
+                    
+                    <div id="recommendations-container" class="recommendations-grid">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+                <!-- All Scholarships Tab  -->
+               
+                <div id="all-scholarships" class="tab-content">
+                    <h2><i class="fas fa-award"></i> All Available Scholarships</h2>
+                    <p class="section-desc">Browse and apply for scholarships</p>
+                    
+                    <div class="search-bar" style="margin-bottom: 25px;">
+                        <input type="text" id="scholarship-search" placeholder="Search by name, provider...">
+                        <select id="scholarship-filter" style="padding: 12px; border: 2px solid #e0e0e0; border-radius: 10px;">
+                            <option value="all">All Scholarships</option>
+                            <option value="merit">Merit Based</option>
+                            <option value="need">Need Based</option>
+                        </select>
+                        <button onclick="searchAllScholarships()" class="btn-primary">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                    </div>
+                    
+                    <div id="all-scholarships-list" class="cards-grid">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- All Work-Study Tab (NEW) -->
+                <div id="all-workstudy" class="tab-content">
+                    <h2><i class="fas fa-briefcase"></i> Work-Study Programs</h2>
+                    <p class="section-desc">Part-time opportunities to earn while you learn</p>
+                    
+                    <div class="search-bar" style="margin-bottom: 25px;">
+                        <input type="text" id="workstudy-search" placeholder="Search by title, organization, or skills...">
+                        <select id="workstudy-filter" style="padding: 12px; border: 2px solid #e0e0e0; border-radius: 10px;">
+                            <option value="all">All Programs</option>
+                            <option value="remote">Remote Only</option>
+                            <option value="onsite">On-site Only</option>
+                            <option value="high-stipend">High Stipend</option>
+                        </select>
+                        <button onclick="searchAllWorkStudy()" class="btn-primary">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                    </div>
+                    
+                    <div id="all-workstudy-list" class="cards-grid">
+                        <div class="loading-spinner">
+                            <div class="spinner"></div>
+                            <p>Loading work-study programs...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Applications Tab -->
+                <div id="applications" class="tab-content">
+                    <h2><i class="fas fa-file-alt"></i> My Applications</h2>
+                    <p class="section-desc">Track your scholarship and work-study applications</p>
+                    
+                    <div id="applications-list">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Crowdfunding Tab -->
+                <div id="crowdfunding" class="tab-content">
+                    <h2><i class="fas fa-hand-holding-heart"></i> Crowdfunding</h2>
+                    
+                    <div style="display: flex; gap: 20px; margin-bottom: 30px;">
+                        <button class="btn-primary" onclick="showCreateCampaign()">
+                            <i class="fas fa-plus"></i> Start a Campaign
+                        </button>
+                    </div>
+                    
+                    <div id="campaigns-list" class="cards-grid">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Profile Tab -->
+                <div id="profile" class="tab-content">
+                    <h2><i class="fas fa-user"></i> My Profile</h2>
+                    <div id="profile-content">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Campaign Modal -->
+   
+    <div id="campaign-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-rocket"></i> Launch Your Campaign</h2>
+                <button type="button" class="modal-close" onclick="closeModal('campaign-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="campaign-form" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label><i class="fas fa-heading"></i> Campaign Title *</label>
+                        <input type="text" id="campaign-title" placeholder="e.g., Help me complete my Computer Science degree" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-align-left"></i> Short Description *</label>
+                        <textarea id="campaign-description" rows="2" placeholder="Brief overview of your campaign..." required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-book-open"></i> Your Story</label>
+                        <textarea id="campaign-story" rows="3" placeholder="Share your journey, financial need, and why supporters should contribute..."></textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label><i class="fas fa-rupee-sign"></i> Goal Amount (₹) *</label>
+                            <input type="number" id="campaign-goal" placeholder="e.g., 100000" required>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-tag"></i> Category</label>
+                            <select id="campaign-category">
+                                <option value="education">Education & Tuition</option>
+                                <option value="research">Research Project</option>
+                                <option value="project">Tech Project / Startup</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Enhanced Image Upload with Preview -->
+                    <div class="form-group">
+                        <label><i class="fas fa-image"></i> Campaign Image</label>
+                        <div class="image-upload-wrapper">
+                            <div class="image-upload-area" id="image-upload-area">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Click to upload image</p>
+                                <span class="upload-hint">PNG, JPG up to 5MB</span>
+                                <input type="file" id="campaign-image" accept="image/*" style="display: none;">
+                            </div>
+                            <div class="image-preview" id="image-preview" style="display: none;">
+                                <img id="preview-img" src="" alt="Preview">
+                                <button type="button" class="remove-image-btn" id="remove-image">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-paper-plane"></i> Launch Campaign
+                        </button>
+                        <button type="button" class="btn-secondary" onclick="closeModal('campaign-modal')">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Edit Profile Modal (NEW) -->
+    <div id="edit-profile-modal" class="modal" style="display: none;">
+        <div class="modal-content" style="max-width: 700px; max-height: 90vh; overflow-y: auto;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2><i class="fas fa-user-edit"></i> Edit Profile</h2>
+                <button onclick="closeModal('edit-profile-modal')" style="background: none; border: none; font-size: 24px; cursor: pointer;">&times;</button>
+            </div>
+            
+            <form id="edit-profile-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label><i class="fas fa-user"></i> Full Name</label>
+                        <input type="text" id="edit-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" id="edit-email" required readonly style="background: #f5f5f5;">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label><i class="fas fa-rupee-sign"></i> Family Annual Income (₹)</label>
+                        <input type="number" id="edit-familyIncome" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-star"></i> Academic Score (%)</label>
+                        <input type="number" id="edit-academicScore" min="0" max="100" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label><i class="fas fa-trophy"></i> Extracurricular Activities</label>
+                        <input type="number" id="edit-extracurriculars" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-users"></i> Siblings in Education</label>
+                        <input type="number" id="edit-siblingsEducation" min="0" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label><i class="fas fa-graduation-cap"></i> Course Name</label>
+                        <input type="text" id="edit-course" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-building"></i> Institution</label>
+                        <input type="text" id="edit-institution" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label><i class="fas fa-calendar-alt"></i> Course Duration (years)</label>
+                        <input type="number" id="edit-courseDuration" min="1" max="6" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-money-bill-wave"></i> Total Tuition Fee (₹)</label>
+                        <input type="number" id="edit-tuitionFee" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label><i class="fas fa-map-marker-alt"></i> Preferred Location</label>
+                        <input type="text" id="edit-preferredLocation" placeholder="e.g., Mumbai, Remote">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-clock"></i> Preferred Hours/Week</label>
+                        <input type="number" id="edit-preferredHours" min="0" max="40">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label><i class="fas fa-code"></i> Skills (comma separated)</label>
+                        <input type="text" id="edit-skills" placeholder="e.g., Python, Communication">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-rupee-sign"></i> Expected Stipend</label>
+                        <input type="number" id="edit-expectedStipend">
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button type="submit" class="btn-primary" style="flex: 1;">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                    <button type="button" onclick="closeModal('edit-profile-modal')" class="btn-secondary" style="flex: 1;">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="student.js"></script>
+</body>
+</html>

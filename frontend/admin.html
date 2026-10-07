@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduFund AI - Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Admin-specific styles that complement the existing style.css */
+        .admin-body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .admin-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Admin Header */
+        .admin-header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 20px 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .admin-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .admin-logo i {
+            font-size: 36px;
+            color: #667eea;
+        }
+
+        .admin-logo h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .admin-logo span {
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+
+        .admin-profile {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .admin-profile span {
+            color: #666;
+            font-weight: 500;
+        }
+
+        .admin-profile i {
+            font-size: 40px;
+            color: #667eea;
+            cursor: pointer;
+        }
+
+        /* Admin Dashboard Layout */
+        .admin-dashboard {
+            display: flex;
+            gap: 25px;
+            min-height: 650px;
+        }
+
+        /* Admin Sidebar */
+        .admin-sidebar {
+            width: 280px;
+            background: white;
+            border-radius: 20px;
+            padding: 25px 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .admin-nav {
+            list-style: none;
+            flex-grow: 1;
+        }
+
+        .admin-nav li {
+            padding: 15px 25px;
+            margin: 5px 10px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .admin-nav li i {
+            width: 24px;
+            font-size: 18px;
+        }
+
+        .admin-nav li:hover {
+            background: #f5f5f5;
+            color: #667eea;
+        }
+
+        .admin-nav li.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .admin-nav li.logout {
+            margin-top: 50px;
+            color: #ef476f;
+        }
+
+        .admin-nav li.logout:hover {
+            background: #fee;
+        }
+
+        /* Admin Main Content */
+        .admin-main {
+            flex: 1;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .admin-tab {
+            display: none;
+        }
+
+        .admin-tab.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .admin-tab h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .admin-tab h1 i {
+            color: #667eea;
+        }
+
+        .admin-tab h2 {
+            font-size: 20px;
+            margin: 25px 0 15px;
+            color: #444;
+        }
+
+        .section-desc {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 15px;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #f5f7ff 0%, #f0f3ff 100%);
+            border-radius: 15px;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border: 2px solid #e0e7ff;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: #667eea;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+        }
+
+        .stat-card i {
+            font-size: 40px;
+            color: #667eea;
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .stat-info h3 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .stat-info p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Tables */
+        .table-container {
+            background: #f8f9ff;
+            border-radius: 15px;
+            padding: 20px;
+            border: 2px solid #e0e7ff;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 15px 10px;
+            color: #667eea;
+            font-weight: 600;
+            border-bottom: 2px solid #e0e7ff;
+        }
+
+        td {
+            padding: 12px 10px;
+            color: #555;
+            border-bottom: 1px solid #e0e7ff;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        /* Forms */
+        .admin-form {
+            max-width: 800px;
+            background: #f8f9ff;
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid #e0e7ff;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            flex: 1;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-group label i {
+            color: #667eea;
+            margin-right: 8px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #667eea;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .checkbox-group {
+            display: flex;
+            gap: 30px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #555;
+            cursor: pointer;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #667eea;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border: 2px solid #f0f0f0;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #667eea;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .card-header i {
+            font-size: 24px;
+            color: #667eea;
+            background: #f0f3ff;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-badge.active {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .status-badge.pending {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+
+        .status-badge.closed {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .card h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .card .provider {
+            color: #667eea;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .card .amount {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            margin: 15px 0;
+        }
+
+        .card .deadline {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .card .deadline i {
+            color: #667eea;
+            margin-right: 5px;
+        }
+
+        .card-footer {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-small {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-small.edit {
+            background: #f0f3ff;
+            color: #667eea;
+        }
+
+        .btn-small.edit:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-small.delete {
+            background: #ffebee;
+            color: #ef476f;
+        }
+
+        .btn-small.delete:hover {
+            background: #ef476f;
+            color: white;
+        }
+
+        .btn-small.view {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        /* Search Bar */
+        .search-bar {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 15px;
+        }
+
+        .search-bar button {
+            padding: 15px 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        
+        /* Update modal styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            overflow-y: auto; /* Enable scrolling on modal backdrop */
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh; /* Limit height */
+            overflow-y: auto; /* Make content scrollable */
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            position: relative;
+            margin: auto;
+        }
+
+        /* Add close button to modal */
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s ease;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .modal-close:hover {
+            color: #ef476f;
+            background: #fee;
+        }
+
+        /* Close when clicking outside */
+        .modal {
+            cursor: pointer;
+        }
+
+        .modal-content {
+            cursor: default;
+        }
+
+
+        .modal-content h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .modal-content form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .modal-content input {
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 15px;
+        }
+
+        .modal-content button {
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            text-align: center;
+            padding: 50px;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .admin-dashboard {
+                flex-direction: column;
+            }
+            
+            .admin-sidebar {
+                width: 100%;
+            }
+            
+            .form-row {
+                flex-direction: column;
+            }
+            
+            .admin-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body class="admin-body">
+    <div class="admin-container">
+        <!-- Admin Header (matches index style) -->
+        <header class="admin-header">
+            <div class="admin-logo">
+                <i class="fas fa-graduation-cap"></i>
+                <h1>EduFund <span>AI</span> <small style="font-size: 14px; color: #667eea; margin-left: 10px;">Admin</small></h1>
+            </div>
+            <div class="admin-profile">
+                <span>Welcome, <strong id="admin-name">Admin</strong></span>
+                <i class="fas fa-user-circle"></i>
+            </div>
+        </header>
+
+        <!-- Admin Dashboard -->
+        <div class="admin-dashboard">
+            <!-- Admin Sidebar (matches nav style from index) -->
+            <div class="admin-sidebar">
+                <ul class="admin-nav">
+                    <li class="active" data-tab="dashboard">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </li>
+                    <li data-tab="scholarships">
+                        <i class="fas fa-award"></i>
+                        <span>Scholarships</span>
+                    </li>
+                    <li data-tab="add-scholarship">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Add Scholarship</span>
+                    </li>
+                    <li data-tab="work-study">
+                        <i class="fas fa-briefcase"></i>
+                        <span>Work-Study</span>
+                    </li>
+                    <li data-tab="students">
+                        <i class="fas fa-users"></i>
+                        <span>Students</span>
+                    </li>
+                    <li data-tab="campaigns">
+                        <i class="fas fa-hand-holding-heart"></i>
+                        <span>Crowdfunding</span>
+                    </li>
+                    <li data-tab="matching">
+                        <i class="fas fa-robot"></i>
+                        <span>AI Matching</span>
+                    </li>
+                    <li class="logout" data-tab="logout">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Admin Main Content -->
+            <div class="admin-main">
+                <!-- Dashboard Tab -->
+                <div id="dashboard" class="admin-tab active">
+                    <h1><i class="fas fa-tachometer-alt"></i> Dashboard Overview</h1>
+                    <p class="section-desc">Welcome to EduFund AI Admin Panel</p>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <i class="fas fa-users"></i>
+                            <div class="stat-info">
+                                <h3 id="total-students">0</h3>
+                                <p>Total Students</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-award"></i>
+                            <div class="stat-info">
+                                <h3 id="active-scholarships">0</h3>
+                                <p>Active Scholarships</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-hand-holding-usd"></i>
+                            <div class="stat-info">
+                                <h3 id="active-campaigns">0</h3>
+                                <p>Active Campaigns</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-file-alt"></i>
+                            <div class="stat-info">
+                                <h3 id="total-applications">0</h3>
+                                <p>Total Applications</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2><i class="fas fa-clock"></i> Recent Applications</h2>
+                    <div class="table-container">
+                        <table id="recent-applications-table">
+                            <thead>
+                                <tr>
+                                    <th>Student</th>
+                                    <th>Type</th>
+                                    <th>Opportunity</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recent-applications">
+                                <tr>
+                                    <td colspan="6" style="text-align: center; color: #999;">Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Scholarships Tab -->
+                <div id="scholarships" class="admin-tab">
+                    <h1><i class="fas fa-award"></i> Manage Scholarships</h1>
+                    <div class="search-bar">
+                        <input type="text" id="scholarship-search" placeholder="Search scholarships by name, provider...">
+                        <button onclick="searchScholarships()"><i class="fas fa-search"></i> Search</button>
+                    </div>
+                    <div class="cards-grid" id="scholarships-list">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Add Scholarship Tab -->
+                
+                <div id="add-scholarship" class="admin-tab">
+                    <h1><i class="fas fa-plus-circle"></i> Add New Scholarship</h1>
+                    <form id="scholarship-form" class="admin-form">
+                        <div class="form-group">
+                            <label><i class="fas fa-graduation-cap"></i> Scholarship Name</label>
+                            <input type="text" id="scholarship-name" placeholder="e.g., Merit Excellence Scholarship" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label><i class="fas fa-building"></i> Provider/Organization</label>
+                            <input type="text" id="scholarship-provider" placeholder="e.g., EduFund Foundation" required>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-rupee-sign"></i> Amount (₹)</label>
+                                <input type="number" id="scholarship-amount" placeholder="e.g., 50000" required>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-calendar"></i> Deadline</label>
+                                <input type="date" id="scholarship-deadline" required>
+                            </div>
+                        </div>
+                        
+                        <!-- NEW: Link field -->
+                        <div class="form-group">
+                            <label><i class="fas fa-link"></i> Official Website Link</label>
+                            <input type="url" id="scholarship-link" placeholder="https://scholarship-website.com/apply" required>
+                            <small style="color: #666;">Students will be redirected to this link to apply</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label><i class="fas fa-align-left"></i> Description</label>
+                            <textarea id="scholarship-description" rows="3" placeholder="Describe the scholarship details..."></textarea>
+                        </div>
+                        
+                        <h3 style="color: #667eea; margin: 20px 0 15px;">Eligibility Criteria</h3>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-star"></i> Minimum Academic Score (%)</label>
+                                <input type="number" id="min-academic-score" min="0" max="100" placeholder="e.g., 75">
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-rupee-sign"></i> Maximum Family Income (₹)</label>
+                                <input type="number" id="max-income" placeholder="e.g., 500000">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label><i class="fas fa-book"></i> Eligible Courses</label>
+                            <input type="text" id="eligible-courses" placeholder="e.g., Engineering, Medical, Arts (comma separated, or 'all')">
+                        </div>
+                        
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" id="merit-based"> Merit Based
+                            </label>
+                            <label>
+                                <input type="checkbox" id="need-based"> Need Based
+                            </label>
+                            <label>
+                                <input type="checkbox" id="requires-extracurricular"> Requires Extracurricular
+                            </label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label><i class="fas fa-clipboard-list"></i> Other Requirements</label>
+                            <textarea id="other-requirements" rows="2" placeholder="Any other requirements..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary" style="width: 100%;">
+                            <i class="fas fa-save"></i> Add Scholarship
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Work-Study Tab -->
+                <div id="work-study" class="admin-tab">
+                    <h1><i class="fas fa-briefcase"></i> Work-Study Opportunities</h1>
+                    
+                    <div style="display: flex; gap: 20px; margin-bottom: 30px;">
+                        <button class="btn-primary" onclick="showAddWorkStudy()">
+                            <i class="fas fa-plus"></i> Add New Opportunity
+                        </button>
+                    </div>
+                    
+                    <div class="cards-grid" id="work-study-list">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Students Tab -->
+                <div id="students" class="admin-tab">
+                    <h1><i class="fas fa-users"></i> Students</h1>
+                    <div class="search-bar">
+                        <input type="text" id="student-search" placeholder="Search students by name, email, course...">
+                        <button onclick="searchStudents()"><i class="fas fa-search"></i> Search</button>
+                    </div>
+                    <div class="cards-grid" id="students-list">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Crowdfunding Tab -->
+                <div id="campaigns" class="admin-tab">
+                    <h1><i class="fas fa-hand-holding-heart"></i> Crowdfunding Campaigns</h1>
+                    <div class="cards-grid" id="campaigns-list">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- AI Matching Tab -->
+                <div id="matching" class="admin-tab">
+                    <h1><i class="fas fa-robot"></i> AI Matching Engine</h1>
+                    
+                    <div class="admin-form" style="margin-bottom: 30px;">
+                        <h3 style="color: #667eea; margin-bottom: 20px;">Find Students for Scholarship</h3>
+                        <select id="scholarship-select" style="width: 100%; padding: 15px; margin-bottom: 20px; border: 2px solid #e0e0e0; border-radius: 10px;">
+                            <option value="">Select a scholarship...</option>
+                        </select>
+                        <button onclick="findEligibleStudents()" class="btn-primary" style="width: 100%;">
+                            <i class="fas fa-search"></i> Find Eligible Students
+                        </button>
+                    </div>
+                    
+                    <div id="matching-results" class="cards-grid">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Login Modal (hidden by default) -->
+    <div id="login-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h2><i class="fas fa-lock"></i> Admin Login</h2>
+            <form id="admin-login-form">
+                <input type="email" id="admin-email" placeholder="Email" value="admin@edufund.ai">
+                <input type="password" id="admin-password" placeholder="Password" value="admin123">
+                <button type="submit">Login to Dashboard</button>
+            </form>
+        </div>
+    </div>
+
+    
+
+    <!-- Add Work-Study Modal -->
+    <div id="work-study-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('work-study-modal')">&times;</button>
+            <h2><i class="fas fa-briefcase"></i> Add Work-Study Opportunity</h2>
+            <form id="work-study-form">
+                <div class="form-group">
+                    <label>Job Title</label>
+                    <input type="text" id="work-title" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Organization</label>
+                    <input type="text" id="work-organization" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Stipend (₹/month)</label>
+                        <input type="number" id="work-stipend" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Hours/Week</label>
+                        <input type="number" id="work-hours" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Duration (months)</label>
+                        <input type="number" id="work-duration" value="6">
+                    </div>
+                    <div class="form-group">
+                        <label>Deadline</label>
+                        <input type="date" id="work-deadline" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" id="work-location" placeholder="City or 'Remote'">
+                </div>
+                
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" id="work-remote"> Remote Work Available
+                    </label>
+                </div>
+                
+                <div class="form-group">
+                    <label>Required Skills</label>
+                    <input type="text" id="work-skills" placeholder="e.g., Python, Communication (comma separated)">
+                </div>
+                
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="work-description" rows="3"></textarea>
+                </div>
+                
+                <div style="display: flex; gap: 10px;">
+                    <button type="submit" class="btn-primary" style="flex: 1;">Add Opportunity</button>
+                    <button type="button" onclick="closeModal('work-study-modal')" class="btn-secondary" style="flex: 1;">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

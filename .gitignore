@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# Secrets and local data
+.env
+*.db
+backend/database/
+backend/uploads/
+backend/temp_uploads/
+backend/models/trained/
+*.pkl
+resume.pdf
+
+# OS / editor
+desktop.ini
+Thumbs.db
+.DS_Store
+.vscode/
