@@ -80,6 +80,16 @@ These are in the repository but not connected to the running app yet. They need 
 - `add_s.py` – a command-line resume scanner that uses the Gemini API (set `GEMINI_API_KEY` first).
 - `crawler/find_scholarships.py` – scholarship crawler.
 
+## Troubleshooting
+
+| Message or problem | What to do |
+| --- | --- |
+| No scholarships appear | Run `python seed_scholarships.py` from the `backend` folder. |
+| Admin login fails | Run `python init_admin.py` to create the admin account. |
+| "Token has expired" or you are suddenly logged out | Login tokens last 1 day. Log in again. |
+| The page loads but shows no data | Make sure `python app.py` is running, and open the site at http://localhost:5000, not as a file. |
+| `ModuleNotFoundError` on start | Activate the virtual environment and run `pip install -r requirements.txt`. |
+
 ## Limitations
 
 - The ledger is kept in memory, so it resets when the server restarts. It demonstrates the idea and is not a real blockchain network.
